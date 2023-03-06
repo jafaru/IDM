@@ -1,0 +1,323 @@
+openapi	"3.0.1"
+info	
+title	"IDM APIs"
+description	"These are APIs to maintain Contact in IDM"
+contact	
+email	"jingwbj@cn.ibm.com"
+version	"1.0.2"
+externalDocs	
+description	"Find out more about IDM"
+url	"https://w3.ibm.com/w3publisher/individual-data-master"
+servers	
+0	
+url	"https://idm-sub.968d96a4.public.multi-containers.ibm.com"
+description	"Dev server"
+1	
+url	"https://sub-test.968d96a4.public.multi-containers.ibm.com"
+description	"Test server"
+2	
+url	"http://localhost:8000"
+description	"local server"
+tags	
+0	
+name	"IDM"
+description	"IDM suppress email API"
+externalDocs	
+description	"Find out more"
+url	"TBD"
+paths	
+/getSubscriptions	
+post	
+tags	
+0	"PrivPref"
+summary	"get email privacy preference."
+operationId	"getsub"
+requestBody	
+description	"send single email to get email privacy preference"
+content	
+application/json	
+schema	
+$ref	"#/components/schemas/EMAIL"
+required	true
+responses	
+200	
+description	"Request been processed succeeds and MDM return success,  or api request has quarantined email"
+content	
+application/json	
+schema	{…}
+401	
+description	"Authentication/Authorization failure"
+content	{}
+500	
+description	"Request can't be process right now. Contact IDM support team please."
+content	{}
+security	
+0	
+idm_bearer	[]
+/updateSubscriptions	
+post	
+tags	
+0	"PrivPref"
+summary	"update email privacy preference."
+operationId	"updatesub"
+requestBody	
+description	"send single email to get email privacy preference"
+content	
+application/json	
+schema	
+$ref	"#/components/schemas/EMAIL_SUBSCRIPTION"
+required	true
+responses	
+200	
+description	"Successful"
+content	
+application/json	
+schema	{…}
+201	
+description	"Request fail when call MDM or fail when updating MIP tables."
+content	{}
+401	
+description	"Authentication/Authorization failure"
+content	{}
+500	
+description	"Request can't be process right now. Contact IDM support team please."
+content	{}
+security	
+0	
+idm_bearer	[]
+/suppressEmail	
+post	
+tags	
+0	"PrivPref"
+summary	"update email privacy preference."
+operationId	"suppressemail"
+requestBody	
+description	"send emails to suppress it."
+content	
+application/json	
+schema	
+$ref	"#/components/schemas/EMAIL_PRIVPREF"
+required	true
+responses	
+200	
+description	"Request been processed successfully"
+content	{}
+201	
+description	"Request fail when call MDM or fail when updating MIP tables."
+content	{}
+401	
+description	"Authentication/Authorization failure"
+content	{}
+500	
+description	"Request can't be process right now. Contact IDM support team please."
+content	{}
+security	
+0	
+idm_bearer	[]
+/mktoSuppressEmail	
+post	
+tags	
+0	"PrivPref"
+summary	"update email privacy preference. For marketo only, use basic authentication. "
+operationId	"mktosuppressemail"
+requestBody	
+description	"send email to suppress it. only email is the *required field."
+content	
+application/json	
+schema	
+$ref	"#/components/schemas/EMAIL_PRIVPREF"
+required	true
+responses	
+200	
+description	"Request been processed successfully"
+content	{}
+201	
+description	"Request fail when call MDM or fail when updating MIP tables."
+content	{}
+401	
+description	"Authentication/Authorization failure"
+content	{}
+500	
+description	"Request can't be process right now. Contact IDM support team please."
+content	{}
+security	
+0	
+idm_basic	[]
+/getEmailPrivPref	
+post	
+tags	
+0	"PrivPref"
+summary	"get email privacy preference."
+operationId	"getIBMPrivPref"
+requestBody	
+description	"send single email to get email privacy preference"
+content	
+application/json	
+schema	
+$ref	"#/components/schemas/EMAIL"
+required	true
+responses	
+200	
+description	"Successful"
+content	
+application/json	
+schema	{…}
+401	
+description	"Authentication/Authorization failure"
+content	{}
+500	
+description	"Request can't be process right now. Contact IDM support team please."
+content	{}
+security	
+0	
+idm_basic	[]
+components	
+schemas	
+PRIVPREF	
+type	"object"
+properties	
+SP_TYPE	
+type	"string"
+description	"S = suppression, P = permission, N = not specified"
+enum	
+0	"S"
+1	"P"
+2	"N"
+SP_GRAN_PREF_TP	
+type	"string"
+example	"IBM"
+PHONE_SP	
+type	"array"
+xml	
+wrapped	true
+items	
+$ref	"#/components/schemas/PRIVPREF"
+ADDR_SP	
+type	"array"
+xml	
+wrapped	true
+items	
+$ref	"#/components/schemas/PRIVPREF"
+EMAIL_ADDR_SP	
+type	"array"
+xml	
+wrapped	true
+items	
+$ref	"#/components/schemas/PRIVPREF"
+EMAIL	
+type	"object"
+properties	
+email	
+type	"string"
+description	"email address use to fetch preference"
+getSubResponse	
+type	"object"
+properties	
+email	
+type	"string"
+example	"john.doe@ibm.com"
+preferences	
+type	"array"
+items	
+type	"string"
+example	
+0	"07xxxxx67bc39f2e"
+1	"07xxxxx67bc39f2f"
+getPrivPrefResponse	
+type	"object"
+properties	
+email	
+type	"string"
+example	"john.doe@ibm.com"
+preferences	
+type	"string"
+description	"S = suppression, P = permission, N = not specified"
+example	"S"
+PrivPrefResp	
+type	"object"
+properties	
+Error	
+type	"array"
+items	
+type	"string"
+example	
+0	"input error: invalid email address"
+Response	
+type	"array"
+items	
+type	"object"
+properties	
+PREF_CD	{…}
+PREF_DESCR	{…}
+PREF_EFF_TS	{…}
+REF_NUM	{…}
+SUPP_TYPE_CD	{…}
+EMAIL_PRIVPREF	
+required	
+0	"email"
+type	"object"
+properties	
+email	
+type	"string"
+example	"john.doe@ibm.com"
+origTransid	
+type	"string"
+example	"trans000001"
+cmpn	
+type	"string"
+example	"campaign 001"
+reason	
+type	"string"
+example	"CR"
+timestamp	
+type	"string"
+example	"2022-08-21T6:57:04Z"
+EMAIL_SUBSCRIPTION	
+required	
+0	"email"
+1	"preferences"
+2	"source"
+3	"timestamp"
+type	"object"
+properties	
+email	
+type	"string"
+example	"john.doe@ibm.com"
+source	
+type	"string"
+example	"Marketo"
+transid	
+type	"string"
+example	"trans000001"
+cmpncode	
+type	"string"
+example	"campaign 001"
+reasoncode	
+type	"string"
+example	"CR"
+preferences	
+type	"object"
+properties	
+07b3bea67bc39f2e	
+type	"string"
+example	"P"
+07b3bea67bc39f2f	
+type	"string"
+example	"P"
+timestamp	
+type	"string"
+example	"2022-08-21T6:57:04Z"
+securitySchemes	
+idm_bearer	
+type	"http"
+scheme	"bearer"
+bearerFormat	"JWT"
+idm_basic	
+type	"http"
+scheme	"basic"
+idm_oauth	
+type	"oauth2"
+flows	
+clientCredentials	
+tokenUrl	"https://eu-de.appid.cloud.ibm.com/oauth/v4/bcaefcc9-2d5c-48cd-b934-29d1e6f75e37/token"
+scopes	{}
