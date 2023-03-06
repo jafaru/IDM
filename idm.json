@@ -1106,8 +1106,7 @@
           }
         }
       },
-      "securitySchemes": {
-           
+      "securitySchemes": {           
             "idm_oauth": {
                 "type": "oauth2",
                 "flows": {
@@ -1115,6 +1114,7 @@
                         "tokenUrl": "https://eu-de.appid.cloud.ibm.com/oauth/v4/bcaefcc9-2d5c-48cd-b934-29d1e6f75e37/token",
                         "scopes": {}
                     }
+				}
             }
            
         }
