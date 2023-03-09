@@ -1106,16 +1106,7 @@
           }
         }
       },
-      "securitySchemes": {
-            "idm_bearer": {
-                "type": "http",
-                "scheme": "bearer",
-                "bearerFormat": "JWT"
-            },
-            "idm_basic": {
-                "type": "http",
-                "scheme": "basic"
-            },
+      "securitySchemes": {            
             "idm_oauth": {
                 "type": "oauth2",
                 "flows": {
