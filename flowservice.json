@@ -15,8 +15,8 @@
     },
    "servers": [
         {
-            "url": "https://dhanalaxmiceramics.com/marketo_sw",
-            "description": "local server"
+            "url": "https://bulletinboard.verticurl.com/vc_ibm",
+            "description": "Verticurl Middleware Server"
         }
     ],
     "tags": [
