@@ -15,8 +15,8 @@
     },
    "servers": [
         {
-            "url": "https://bulletinboard.verticurl.com/vc_ibm",
-            "description": "Verticurl Middleware Server"
+            "url": "https://aquascbe.com/swagger/",
+            "description": "Middleware Server"
         }
     ],
     "tags": [
@@ -26,11 +26,11 @@
       }
     ],
     "security": [
-    
+   
     {
       "idm_basic": []
     }
-    
+   
   ],
     "paths": {
       "/submitAsyncAction": {
@@ -1103,7 +1103,7 @@
         }
       },
       "securitySchemes": {
-           
+            
             "idm_basic": {
                 "type": "http",
                 "scheme": "basic"
