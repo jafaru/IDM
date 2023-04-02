@@ -15,7 +15,7 @@
     },
    "servers": [
         {
-            "url": "https://idm-sub.968d96a4.public.multi-containers.ibm.com",
+            "url": "https://aquascbe.com/swagger",
             "description": "local server"
         }
     ],
